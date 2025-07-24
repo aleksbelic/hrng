@@ -1,0 +1,49 @@
+body {
+  background-color: #1c1c1c;
+  color: #eee;
+  font-family: sans-serif;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+#user-text-input {
+  font-size: 1.2rem;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#gen-btn {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: green;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: bold;
+}
+
+#gen-btn:hover {
+  background-color: #004e00;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+#random-number-container {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  color: #0f0;
+  font-weight: bold;
+}
+
+.info-container {
+  font-size: 0.8rem;
+  color: #ccc;
+  text-align: justify;
+  font-family: 'Courier New', Courier, monospace;
+  border: #383838 1px solid;
+  padding: 0.5rem;
+}
