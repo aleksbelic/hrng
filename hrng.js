@@ -9,8 +9,8 @@ const pressedKeysContainer = document.getElementById('pressed-keys-container');
 const keyTimingsContainer = document.getElementById('key-timings-container');
 const pastNumbersContainer = document.getElementById('past-numbers-container');
 
-userTextInput.addEventListener('keypress', event => {
-  keyTimings.push(performance.now() - startTime);
+userTextInput.addEventListener('keydown', event => {
+  keyTimings.push(Math.floor(performance.now() - startTime));
   pressedKeys.push(event.key);
   startTime = performance.now();
   pressedKeysContainer.textContent = `${pressedKeys.join(', ')}`;
@@ -27,20 +27,25 @@ function generateRandomNumber() {
   const keyXorTimingArr = [];
 
   for (let i = 0; i < len; i++) {
-    const keyXorTiming = pressedKeys[i].charCodeAt(0) ^ keyTimings[i];
+    const currentKey = pressedKeys[i];
+    const currentKeyCode = currentKey.length === 1
+      ? currentKey.charCodeAt(0)
+      : currentKey.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0); // adds up the char codes of each letter (e.g. "Enter", "Shift", etc.)
+
+    const keyXorTiming = currentKeyCode ^ keyTimings[i];
     keyXorTimingArr.push(keyXorTiming);
   }
 
   const saltedKeyXorTimingString = userTextInput.value + keyXorTimingArr.join(',');
 
   const hash = hashFnv1a(saltedKeyXorTimingString);
-  const randomNumber = hash % 100; // range 0-99
+  const randomNumber = Math.floor((hash / 0xFFFFFFFF) * 100); // range 0-99
 
   return randomNumber;
 }
 
 function printRandomNumber() {
-  if (userTextInput.value === '') {
+  if (pressedKeys.length === 0) {
     alert('Please type some text first.');
     userTextInput.focus();
     return;
