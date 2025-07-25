@@ -5,17 +5,17 @@ This project is a human-driven random number generator built in JavaScript. It c
 ## 🚀 Features
 
 - Captures real-time keyboard input from the user  
-- Measures time intervals between printable keystrokes  
+- Measures time intervals between keystrokes  
 - Generates randomness based on typing dynamics  
 - Fully client-side, no external dependencies
 
 ## 🧠 How It Works
 
 1. The user begins typing in the input field.
-2. The app listens for `keypress` events (only printable characters).
-3. On each keypress:
+2. The app listens for `keydown` events.
+3. On each keydown:
    - The key is added to the `pressedKeys` array  
-   - The time delta since the last keypress is added to the `keyTimings` array
+   - The time delta since the last keydown event is added to the `keyTimings` array
 4. The arrays `pressedKeys` and `keyTimings` are combined using XOR  
 5. The result is salted with the user input and hashed using the [FNV-1a](https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function) algorithm  
 6. The hash is reduced to a number between 0–99 using a modulo operation
@@ -23,7 +23,7 @@ This project is a human-driven random number generator built in JavaScript. It c
 
 ## 🔐 Why This Is Considered Entropy
 
-Human typing behavior is unpredictable and difficult to replicate. The variable timing between keypresses introduces non-deterministic data, which makes the outcome hard to fake or reproduce — a key trait of entropy.
+Human typing behavior is unpredictable and difficult to replicate. The variable timing between keydowns introduces non-deterministic data, which makes the outcome hard to fake or reproduce — a key trait of entropy.
 
 ## 🎯 Use Cases
 
